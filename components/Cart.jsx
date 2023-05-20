@@ -144,7 +144,8 @@ const Cart = () => {
 								}}
 								onLoadPaymentData={(paymentRequest) => {
 									console.log("Success", paymentRequest);
-									window.location.href = "http://localhost:3000/success";
+									window.location.href =
+										"https://ecommerce-website-79e7.vercel.app//success";
 									return { transactionState: "SUCCESS" };
 								}}
 								onPaymentAuthorized={(paymentData) => {
