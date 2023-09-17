@@ -1,9 +1,33 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
 import { client } from "@/lib/client";
 import { Product, FooterBanner, HeroBanner } from "../components";
 
 const Home = ({ products, bannerData }) => {
+	const [userCountry, setUserCountry] = useState("");
+	useEffect(() => {
+		const getLocation = async () => {
+			const url = "https://ip-geo-location.p.rapidapi.com/ip/check?format=json";
+			const options = {
+				method: "GET",
+				headers: {
+					"X-RapidAPI-Key":
+						"8549f453f9msh9febfdec9045819p1102a3jsn16cd87b30620",
+					"X-RapidAPI-Host": "ip-geo-location.p.rapidapi.com",
+				},
+			};
+
+			try {
+				const response = await fetch(url, options);
+				const result = await response.text();
+				const jsonResult = await JSON.parse(result);
+				setUserCountry(jsonResult.country?.name);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+		getLocation();
+	}, []);
+	console.log(userCountry);
 	return (
 		<>
 			<HeroBanner heroBanner={bannerData.length && bannerData[0]} />
@@ -13,7 +37,11 @@ const Home = ({ products, bannerData }) => {
 			</div>
 			<div className="products-container">
 				{products?.map((product) => (
-					<Product key={product._id} product={product} />
+					<Product
+						key={product._id}
+						product={product}
+						userCountry={userCountry}
+					/>
 				))}
 			</div>
 			<FooterBanner footerBanner={bannerData && bannerData[0]} />

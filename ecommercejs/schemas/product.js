@@ -18,6 +18,11 @@ export default {
       type: 'string',
     },
     {
+      name: 'nameInGerman',
+      title: 'Name in German',
+      type: 'string',
+    },
+    {
       name: 'slug',
       title: 'Slug',
       type: 'slug',
