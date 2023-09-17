@@ -27,7 +27,6 @@ const Home = ({ products, bannerData }) => {
 		};
 		getLocation();
 	}, []);
-	console.log(userCountry);
 	return (
 		<>
 			<HeroBanner heroBanner={bannerData.length && bannerData[0]} />
